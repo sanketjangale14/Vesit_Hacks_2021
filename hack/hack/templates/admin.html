@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>VESIT</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Ubuntu&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+ 
+
+  
+     <!-- Nav Bar -->
+  <div style="width: 100%;">
+  <nav class="navbar  navbar-expand-lg navbar-dark tinav " style="background-color: black; opacity: 0.8;">
+    <a class="navbar-brand" href="" style="width: 15%;"><img src="{{ url_for('static', filename='images/v5.png') }}" alt="" style="width: 15%; margin-right: 10px; margin-left: 10px;">VESIT Dashboard</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#footer">Contact us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  </div>
+
+
+
+  <section id="about">
+    <hr>
+    <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist" >
+      <li class="nav-item" role="presentation" >
+        <a style="font-size: medium;" class="nav-link active" id="pills-rap-tab" data-toggle="pill" href="#pills-rap" role="tab" aria-controls="pills-rap" aria-selected="true">Department/Faculty</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a style="font-size: medium;" class="nav-link" id="pills-dep-tab" data-toggle="pill" href="#pills-dep" role="tab" aria-controls="pills-dep" aria-selected="false">Institute Level Committee</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a style="font-size: medium;" class="nav-link" id="pills-high-tab" data-toggle="pill" href="#pills-high" role="tab" aria-controls="pills-high" aria-selected="false">Department Level Committee</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a style="font-size: medium;" class="nav-link" id="pills-team-tab" data-toggle="pill" href="#pills-team" role="tab" aria-controls="pills-team" aria-selected="false">Student Bodies</a>
+      </li>
+    </ul>
+    <hr>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-rap" role="tabpanel" aria-labelledby="pills-rap-tab">
+        <div class="row">
+          <div class="about-column col-lg-6 col-md-6 " style="border-right: 3px solid black;" >
+            <h2>Add Faculty</h2> 
+            <form action="/addfaculty" method="POST">
+                <div class="select">
+                  <select name="slct" id="slct">
+                    <option selected disabled>Choose Department</option>
+                    {% for o in add_fac %}
+                      <option value="{{ o.dep_id }}">{{ o.dep_name }}</option>
+                    {% endfor %}   
+                  </select>
+                </div>
+                <div class="control">
+                  <b><label for="name">Name</label></b>
+                  <input name='fac_name' type="text" id="name" placeholder="Enter your Full Name" >
+                  </div>
+                  <div class="control">
+                    <b><label for="email">Email</label></b>
+                    <input name='fac_email' type="text" id="email" placeholder="Enter Email ID" >
+                    </div>
+                    <div class="control">
+                      <b><label for="contact">Contact Number</label></b>
+                      <input name='fac_contact' type="text" id="contact" placeholder="Enter Contact Number" >
+                      </div>
+                    <div class="control">
+                      <input type="submit" class="btn" value="Done">
+                      </div>
+                    <div id="addF">
+                        
+                    </div>
+              </form>
+          </div>
+    
+          <div class="about-column col-lg-6 col-md-6 ">
+            <h2>Add Department</h2>
+            <form action="/adddepartment" method="POST">
+              
+              <div class="control">
+                <b><label for="dname">Department Name</label></b>
+                <input name="dep_name" type="text" id="dname" placeholder="Enter your Department Name" >
+                </div>
+                <b><label for="hid">HOD ID</label></b>
+                <div class="input-group mb-3 " >
+                  <input style="background: #ddd;" name='hodid' id='hodid' type="text" class="form-control" placeholder="Enter Faculty ID" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button id='hodcheckbtn' class="btn " type="button" style="background-color: #e27802; color: #fff;">Check</button>
+                  </div>
+                </div>
+                <div id="checkhod">
+                    
+                </div>
+                  <div class="control">
+                    <input type="submit" class="btn" value="Add">
+                    </div>
+                  <div id="addDep">
+
+                  </div>
+            </form>
+            
+            
+          </div>
+    
+        </div>
+      </div>
+
+            <div class="tab-pane fade" id="pills-dep" role="tabpanel" aria-labelledby="pills-dep-tab">
+        <div class="row">
+          <div class="about-column col-lg-6 col-md-6 " style="border-right: 3px solid black;" >
+            <h2>Add Faculty Member</h2> 
+            <form action="\addinstfaculty" method="POST">
+                <div class="select">
+                  <select name="slctinsfac" id="slct">
+                    <option selected disabled>Choose Committee</option>
+                    {% for o in add_ins_fac %}
+                    <option value="{{ o.comit_id }}">{{ o.comit_name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="input-group mb-3 " >
+                  <input style="background: #ddd;" name='ins_fac_id' id='ins_fac_id' type="text" class="form-control" placeholder="Enter Faculty ID" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn "  id='add_ins_fac_btn' type="button" style="background-color: #e27802; color: #fff;">Check</button>
+                  </div>
+                </div>
+                <div id="checkfacInst">
+
+                </div>
+                <div class="control">
+                  <b><label for="role">Role</label></b>
+                  <input type="text" name="ins_fac_role" id="role" placeholder="Enter your role" >
+                  </div>
+                <div class="control">
+                  <input type="submit" class="btn" value="Add">
+                  </div>
+                  <div id="addRol">
+
+                  </div>
+                    <div id="addF">
+                        
+                    </div>
+              </form>
+          </div>
+    
+          <div class="about-column col-lg-6 col-md-6 ">
+            <h2>Add Committee</h2>
+            <form action="/addinstcommittee" method="POST">
+              
+              <div class="control">
+                <b><label for="ciname">Committee Name</label></b>
+                <input type="text" name="commname" id="ciname" placeholder="Enter your Committee Name" >
+                </div>
+                  <div class="control">
+                    <input type="submit" class="btn" value="Add">
+                    </div>
+                  <div id="addIcom">
+
+                  </div>
+            </form>
+            <hr style="height: 1px; background: black;">
+            <h2>Modify Role</h2>
+            <form action="/modifyinsrole" method="POST">
+              <div class="select">
+                <select name="emp_ins_id" id="slct">
+                  <option selected disabled>Choose Faculty</option>
+                  {% for o in fac_ins_id %}
+                    <option value="{{ o.emp_id }}">{{ o.emp_id }}</option>
+                    {% endfor %}
+                </select>
+              </div>
+              <div class="control">
+                <b><label for="role1">Role</label></b>
+                <input type="text" id="role1" name="modinsrole" placeholder="Enter your role" >
+                </div>
+
+                <div class="control">
+                  <input type="submit" class="btn" value="Modify">
+                  </div>
+                  <div id="modRole">
+
+                  </div>
+            </form>
+          </div>
+    
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-high" role="tabpanel" aria-labelledby="pills-high-tab">
+        <div class="row">
+          <div class="about-column col-lg-6 col-md-6 " style="border-right: 3px solid black;" >
+            <h2>Add Faculty Member</h2> 
+            <form action="\adddeptfaculty" method="POST">
+                <div class="select">
+                  <select name="slctdepfac" id="slct">
+                    <option selected disabled>Choose Committee</option>
+                    {% for o in add_dep_fac %}
+                    <option value="{{ o.comit_id }}">{{ o.comit_name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="input-group mb-3 " >
+                  <input style="background: #ddd;" name='dep_fac_id' id='dep_fac_id' type="text" class="form-control" placeholder="Enter Faculty ID" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn " id='add_dep_fac_btn' type="button" style="background-color: #e27802; color: #fff;">Check</button>
+                  </div>
+                </div>
+                <div id="checkfacDep">
+
+                </div>
+                <div class="control">
+                  <b><label for="role2">Role</label></b>
+                  <input type="text" name="dep_fac_role" id="role2" placeholder="Enter your role" >
+                  </div>
+                <div class="control">
+                  <input type="submit" class="btn" value="Add">
+                  </div>
+                  <div id="addRol2">
+
+                  </div>
+                    <div id="addF2">
+                        
+                    </div>
+              </form>
+          </div>
+    
+          <div class="about-column col-lg-6 col-md-6 ">
+            <h2>Add Committee</h2>
+            <form action="/adddeptcommittee" method="POST">
+              
+              <div class="control">
+                <b><label for="cdname">Committee Name</label></b>
+                <input type="text" id="cdname" name= "commname" placeholder="Enter your Committee Name" >
+                </div>
+                  <div class="control">
+                    <input type="submit" class="btn" value="Add">
+                    </div>
+                  <div id="addDcom">
+
+                  </div>
+            </form>
+            <hr style="height: 1px; background: black;">
+            <h2>Modify Role</h2>
+            <form action="/modifydeprole" method="POST">
+              <div class="select">
+                <select name="emp_dep_id" id="slct">
+                  <option selected disabled>Choose Faculty</option>
+                  {% for o in fac_dep_id %}
+                    <option value="{{ o.emp_id }}">{{ o.emp_id }}</option>
+                    {% endfor %}
+                </select>
+              </div>
+              <div class="control">
+                <b><label for="role3">Role</label></b>
+                <input type="text" name="moddeprole" id="role3" placeholder="Enter your role" >
+                </div>
+
+                <div class="control">
+                  <input type="submit" class="btn" value="Modify">
+                  </div>
+                  <div id="modRole3">
+
+                  </div>
+            </form>
+          </div>
+    
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-team" role="tabpanel" aria-labelledby="pills-team-tab">
+        <div class="row">
+          <div class="about-column col-lg-6 col-md-6 " style="border-right: 3px solid black;" >
+            <h2>Add Faculty Member</h2> 
+            <form action="/addstubodyfaculty" method="POST">
+                <div class="select">
+                  <select name="slctstufac" id="slct">
+                    <option selected disabled>Choose Committee</option>
+                    {% for o in add_stu_fac %}
+                    <option value="{{ o.comit_id }}">{{ o.comit_name }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="input-group mb-3 " >
+                  <input style="background: #ddd;" name='stu_fac_id' id='stu_fac_id' type="text" class="form-control" placeholder="Enter Faculty ID" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn " id="add_stu_fac_btn" type="button" style="background-color: #e27802; color: #fff;">Check</button>
+                  </div>
+                </div>
+                <div id="checkFacStuB">
+
+                </div>
+                <div class="control">
+                  <b><label for="role4">Role</label></b>
+                  <input type="text" name="stu_fac_role" id="role4" placeholder="Enter your role" >
+                  </div>
+                <div class="control">
+                  <input type="submit" class="btn" value="Add">
+                  </div>
+                  <div id="addRol4">
+
+                  </div>
+                    <div id="addF4">
+                        
+                    </div>
+              </form>
+          </div>
+    
+          <div class="about-column col-lg-6 col-md-6 ">
+            <h2>Add Committee</h2>
+            <form action="/addstubodycommittee" method="POST">
+              
+              <div class="control">
+                <b><label for="cStuBname">Committee Name</label></b>
+                <input type="text" id="cStuBname" name="commname" placeholder="Enter your Committee Name" >
+                </div>
+                  <div class="control">
+                    <input type="submit" class="btn" value="Add">
+                    </div>
+                  <div id="addStuBcom">
+
+                  </div>
+            </form>
+            <hr style="height: 1px; background: black;">
+            <h2>Modify Role</h2>
+            <form action="/modifysturole" method="POST">
+              <div class="select">
+                <select name="emp_stu_id" id="slct">
+                  <option selected disabled>Choose Faculty</option>
+                  {% for o in fac_stu_id %}
+                    <option value="{{ o.emp_id }}">{{ o.emp_id }}</option>
+                    {% endfor %}
+                </select>
+              </div>
+              <div class="control">
+                <b><label for="role5">Role</label></b>
+                <input type="text" name="modsturole" id="role5" placeholder="Enter your role" >
+                </div>
+
+                <div class="control">
+                  <input type="submit" class="btn" value="Modify">
+                  </div>
+                  <div id="modRole5">
+
+                  </div>
+            </form>
+          </div>
+    
+        </div>
+    </div>
+
+
+
+  </section>
+
+
+  <!-- Footer -->
+
+  <footer id="footer">
+    <i class="social-icon fab fa-facebook-f fa-2x"></i>
+    <i class="social-icon fab fa-twitter fa-2x"></i>
+    <i class="social-icon fab fa-instagram fa-2x"></i>
+    <i class="social-icon fas fa-envelope fa-2x"></i>
+    <p style="color:#fff;">© Copyright 2021 VESIT</p>
+
+  </footer>
+
+
+</body>
+
+<script>
+    
+  $(document).ready(function(){
+
+    // jQuery methods go here...
+
+    $("#hodcheckbtn").click(function(){
+      var id = $('#hodid').val()
+      alert(id)
+      
+      $.ajax({
+        type:"POST",
+        cache:false,
+        url:"{{ url_for('checkhod') }}",
+        data:{id: id}, 
+        success: function (responsedata) {
+          $('#checkhod').html(responsedata);
+        }
+      });
+    });
+
+    $("#add_ins_fac_btn").click(function(){
+      var id = $('#ins_fac_id').val()
+      alert(id)
+      
+      $.ajax({
+        type:"POST",
+        cache:false,
+        url:"{{ url_for('checkhod') }}",
+        data:{id: id}, 
+        success: function (responsedata) {
+          $('#checkfacInst').html(responsedata);
+        }
+      });
+    });
+
+      $("#add_dep_fac_btn").click(function(){
+        var id = $('#dep_fac_id').val()
+        alert(id)
+        
+        $.ajax({
+          type:"POST",
+          cache:false,
+          url:"{{ url_for('checkhod') }}",
+          data:{id: id}, 
+          success: function (responsedata) {
+            $('#checkfacDep').html(responsedata);
+          }
+        });
+      });
+
+        $("#add_stu_fac_btn").click(function(){
+          var id = $('#stu_fac_id').val()
+          alert(id)
+          
+          $.ajax({
+            type:"POST",
+            cache:false,
+            url:"{{ url_for('checkhod') }}",
+            data:{id: id}, 
+            success: function (responsedata) {
+              $('#checkFacStuB').html(responsedata);
+            }
+        });
+    
+  
+  });
+});
+
+</script>
+
+</html>

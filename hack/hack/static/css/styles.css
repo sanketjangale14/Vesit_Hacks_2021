@@ -1,0 +1,274 @@
+body{
+  font-family: "Montserrat";
+  text-align: center;
+}
+
+h1{
+  font-family: "Montserrat";
+  font-weight: 900;
+  font-size: 3.5rem;
+  line-height: 1.5;
+}
+
+h2{
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+h3{
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+p{
+  color: #8f8f8f;
+}
+
+
+.tinav{
+  
+  background-color: #000;
+  opacity: 0.7;
+}
+
+.title{
+  height:650px;
+  background-size: cover; 
+  background-position: center center;
+  background-repeat: no-repeat;
+  text-align:center;
+  margin:auto;
+  padding:0;
+}
+
+
+
+
+/* Navigation bar */
+
+.navbar{
+  padding:0 0 1rem 0;
+}
+
+.navbar-brand{
+  font-family: "Ubuntu";
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.nav-item{
+  padding: 0 18px;
+}
+
+.nav-link{
+  font-size: 1.2rem;
+  font-family: "Montserrat";
+  font-weight:normal;
+}
+
+
+
+/* Feature Section */
+
+#features{
+  padding: 7% 15%;
+  background-color: #fff;
+  position: relative;
+}
+
+
+.feature-box{
+  padding: 5%;
+}
+
+.icon{
+  color:  #e27802;
+  margin-bottom: 1rem;
+}
+
+.icon:hover{
+  color: #f0a500;
+}
+
+/* Testimonial Section */
+
+#testimonials{
+  /* background-color: #6cdbeb; */
+  background-color: #e27802;
+  color: #fff;
+}
+
+.testimonials-img{
+  width: 10%;
+  border-radius: 100%;
+  margin: 20px;
+}
+
+.carousel-item {
+    padding: 7% 15%;
+}
+
+
+/* About Us */
+
+#about{
+  padding: 100px;
+  padding-top: 20px;
+  background-color: #fff;
+}
+
+.about-img{
+  width: 60%;
+  margin-bottom: 50px;
+}
+.about-column{
+  padding: 3% 2%;
+}
+
+.nav-pills .nav-link.active { background-color: #e27802;}
+.nav-pills .nav-link{ color: #000000;}
+/* footer section */
+
+#footer{
+  padding: 4% 10%;
+  background-color:#e27802;
+}
+
+.social-icon{
+  margin: 20px 10px;
+}
+
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #000000;
+  background-image: none;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select */
+.select {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 3em;
+  line-height: 3;
+  background: #2c3e50;
+  overflow: hidden;
+  border-radius: .25em;
+  margin-bottom: 20px;
+}
+select {
+  flex: 1;
+  padding: 0 .5em;
+  color: #fff;
+  cursor: pointer;
+}
+/* Arrow */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #e27802;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
+}
+
+
+@media (max-width: 1028px) {
+
+  #title{
+    text-align: center;
+  }
+
+  .select {
+    position: relative;
+    display: flex;
+    width: 70%;
+    height: 3em;
+    line-height: 3;
+    background: #2c3e50;
+    overflow: hidden;
+    border-radius: .25em;
+    margin-bottom: 20px;
+  }
+
+  .title-img{
+    position: static;
+    transform: rotate(0);
+  }
+
+}
+
+
+.form-container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 380px;
+  padding: 50px 30px;
+  border-radius: 10px;
+  box-shadow:7px 7px 60px #000;
+}
+.control input{
+  padding: 10px;
+  font-size: 16px;
+  display: block;
+  width: 100%;
+  color:#000;
+  background: #ddd;
+  outline: none;
+  border: none;
+  margin: 1em 0;
+
+}         
+.control .btn{
+  color: #fff;
+  text-transform: uppercase;
+  background: #e27802;
+  transition:opacity .3s ease;
+}
+.btn:focus{
+  opacity: 1;
+}
+.eventlink{
+  color: #000;
+  text-decoration: none;
+}
+.eventlink:hover{
+  background-color: #f39c12;
+  padding: 20px 60px;
+  color: #fff;
+  text-decoration: none;
+}
+.eventdiv{
+  margin: 30px;
+}
+.hodlink{
+  color: #000;
+  text-decoration: none;
+}
+.hodlink:hover{
+  text-decoration: none;
+}

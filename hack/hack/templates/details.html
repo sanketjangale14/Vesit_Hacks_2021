@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>VESIT</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Ubuntu&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+
+         <!-- Nav Bar -->
+      <div style="width: 100%;">
+      <nav class="navbar  navbar-expand-lg navbar-dark tinav " style="background-color: black; opacity: 0.8;">
+        <a class="navbar-brand" href="" style="width: 15%;"><img src="{{ url_for('static', filename='images/v5.png') }}" alt="" style="width: 15%; margin-right: 10px; margin-left: 10px;">VESIT Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#footer">Contact us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      </div>
+    
+
+
+
+
+  <section id="about">
+      <h1 style="text-decoration: underline;">Event Details</h1>
+    <div  style="margin-left: 25%; margin-top: 100px; width: 50%; padding: 50px 60px; border-radius: 10px; box-shadow:7px 7px 60px #000; text-align: justify;">
+        <h4>Event Name: {{ eve.event_name }}</h4>
+        <h4>Event Organizer: Faculty 5</h4>
+        <h4>Event Venue: {{ eve.event_venue }}</h4>
+        <h4>Commencement Date: {{ eve.date_start }}</h4>
+        <h4>End Date: {{ eve.date_end }}</h4>
+        <h4>Commencement Time: {{ eve.time_start }}</h4>
+        <h4>End time: {{ eve.time_end }}</h4>
+        <h4>Approval Status: {{ eve.approval_status }}</h4>
+        {% if  eve.completion_status  %}
+          <h4>Completion Status: {{ eve.completion_status }}</h4>
+        {% else %}
+          <h4>Completion Status: N.A. </h4>
+        {% endif %}
+
+    </div>
+    <div style="margin-left: 25%; margin-top: 100px; width: 50%; padding: 50px 60px; border-radius: 10px; box-shadow:7px 7px 60px #000; text-align: justify;">
+        {% if everes %}
+        <h4>Winners: {{ everes.winner_name }}</h4>
+        <h4>Runner ups: {{ everes.runner_up }}</h4>
+        {% else %}
+        <h4>Winners: N.A. </h4>
+        <h4>Runner ups: N.A.</h4>
+        {% endif %}
+    </div>
+    
+    <div style=" margin-top: 100px; width: 100%; padding: 50px 60px; border-radius: 10px; box-shadow:7px 7px 60px #000; text-align: justify;">
+      <h2 style="text-align: center;">Photo Gallery</h2>
+      <div class="row"  >
+        {% for i in evemedia %}
+        <div  class="col"><img style="width: 100%; height: 70%;" src="/static/uploads/{{ i.photos }}" alt=""></div>
+        {% endfor %}
+        
+      </div >
+
+    </div>
+    
+    
+    
+
+    
+
+  </section>
+
+
+  <!-- Footer -->
+
+  <footer id="footer">
+    <i class="social-icon fab fa-facebook-f fa-2x"></i>
+    <i class="social-icon fab fa-twitter fa-2x"></i>
+    <i class="social-icon fab fa-instagram fa-2x"></i>
+    <i class="social-icon fas fa-envelope fa-2x"></i>
+    <p style="color:#fff;">© Copyright 2021 VESIT</p>
+
+  </footer>
+
+
+</body>
+<script>
+  function myFunction() {
+    document.getElementById("ctime").step = "10";
+    document.getElementById("etime").step = "10";
+  }
+  </script>
+  <script>
+    function showDiv(divId, element)
+{
+    document.getElementById(divId).style.display = element.value == 2 ? 'block' : 'none';
+}
+  </script>
+</html>

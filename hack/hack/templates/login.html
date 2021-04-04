@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VESIT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Ubuntu&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    
+</head>
+<body>
+    <section style="background: url({{ url_for('static', filename='images/v2.png') }}); height: 100vh; width: 100%; background-size: cover; background-position: center center;">
+        <div class="form-container">
+            <h1>Login Form</h1>
+
+        <form action="{{ url_for('login') }}" method="POST">
+            <div class="control">
+            <b><label for="email">Email</label></b>
+            <input type="text" name='email' id="email" placeholder="Enter your VES ID" >
+            </div>
+            <div class="control">
+            <b><label for="psw">Password</label></b>
+            <input type="password" name='password' id="psw" placeholder="Enter a strong Password">
+            </div>
+            <div id="error_msg" style="margin-bottom: 15px; text-align: center;">
+              
+            </div>
+            
+            <div class="select">
+              <select name="slct" id="slct">
+                <option selected disabled>Login as</option>
+                <option value="Admin">Admin</option>
+                <option value="Student">Student</option>
+                <option value="Principal">Principal</option>
+                <option value="Faculty">Faculty</option>
+                <option value="HOD">HOD</option>
+              </select>
+            </div>
+            
+            <div class="control">
+            <input type="submit" class="btn" value="Login">
+            </div>
+        </form>
+        <p><a href="forgot.html">Forget password ?</a></p>
+        </div>
+    </section>
+</body>
+</html>

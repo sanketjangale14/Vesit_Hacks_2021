@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>VESIT</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Ubuntu&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"
+            type="text/javascript"></script>
+  <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/themes/humanity/jquery-ui.css"
+          rel="Stylesheet" type="text/css" />
+</head>
+
+<body>
+
+
+         <!-- Nav Bar -->
+      <div style="width: 100%;">
+      <nav class="navbar  navbar-expand-lg navbar-dark tinav " style="background-color: black; opacity: 0.8;">
+        <a class="navbar-brand" href="" style="width: 15%;"><img src="{{ url_for('static', filename='images/v5.png') }}" alt="" style="width: 15%; margin-right: 10px; margin-left: 10px;">VESIT Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#footer">Contact us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      </div>
+    
+
+
+
+
+  <section id="about">
+    <div class="row" style="background-color: #e27802; color: #000;">
+      <div class="col-lg-6 col-md-6" style="text-align: justify;">
+        <h4>Name: {{ current_user.stu_name }}</h4>
+        <h4>Employee ID: {{ current_user.i_id }}</h4>
+        <h4>Email ID: {{ current_user.email }}</h4>
+      </div>
+      <div class="col-lg-6 col-md-6" style="text-align: justify;">
+        <h4>Contact Number: {{ current_user.phone }}</h4>
+        <h4>Committee: {{ userdata.cmname.comit_name }}</h4>
+        <h4>Role: {{ userdata.cm.role }}</h4>
+      </div>
+    </div>
+    
+    <hr>
+    <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation" >
+        <a style="font-size: large;" class="nav-link active" id="pills-rap-tab" data-toggle="pill" href="#pills-rap" role="tab" aria-controls="pills-rap" aria-selected="true">Event Registration</a>
+      </li>
+      {% if userdata.cm.flag %}
+      <li class="nav-item" role="presentation">
+        <a style="font-size: large;" class="nav-link" id="pills-dep-tab" data-toggle="pill" href="#pills-dep" role="tab" aria-controls="pills-dep" aria-selected="false">Event Enlisting</a>
+      </li>
+      {% endif %}
+      <li class="nav-item" role="presentation">
+        <a style="font-size: large;" class="nav-link" id="pills-high-tab" data-toggle="pill" href="#pills-high" role="tab" aria-controls="pills-high" aria-selected="false">Event History</a>
+      </li>
+      {% if userdata.cm.flag %}
+      <li class="nav-item" role="presentation">
+        <a style="font-size: medium;" class="nav-link" id="pills-team-tab" data-toggle="pill" href="#pills-team" role="tab" aria-controls="pills-team" aria-selected="false">Event Report</a>
+      </li>
+      {% endif %}
+    </ul>
+    <hr>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-rap" role="tabpanel" aria-labelledby="pills-rap-tab" style=" margin-left: 25%; margin-top: 100px; width: 50%; padding: 50px 60px; border-radius: 10px; box-shadow:7px 7px 60px #000;">
+          
+        <form action="/addparticipants" method="POST">
+            <h2>Event Registration</h2>
+            <div class="control">
+                <b><label for="evename">Event Name</label></b>
+                <div class="select" style="width: 100%;" >
+                    <select name="dropdownevereg" id="eve_reg_drpdown" size=1 >
+                      <option selected disabled>Choose Event</option>
+                      {% for o in eve_reg %}
+                        <option value="{{ o }} {{ o.event_id }}">{{ o.event_name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <b><label >Participants</label></b>
+                  <div id='somewhere' name='somewhere'>
+
+                  </div>
+               <div class="control">
+                    <input type="submit" class="btn" value="Add Participants">
+                    </div>
+                    <div id="sendR">
+  
+                    </div>
+                </div>
+        </form>
+      </div>
+
+      {% if userdata.cm.flag %}
+        <div class="tab-pane fade " id="pills-dep" role="tabpanel" aria-labelledby="pills-dep-tab" style=" margin-left: 25%; margin-top: 100px; width: 50%; padding: 50px 60px; border-radius: 10px; box-shadow:7px 7px 60px #000;">
+            <h2>Create Event</h2>
+            <form action="/createeventstu" method="POST">
+              <div class="control">
+                  <b><label for="role">Event Name</label></b>
+                  <input type="text" name="event_name"  id="role" placeholder="Enter Event Name" >
+                  <b><label for="cdate">Commencement Date</label></b>
+                  <input type="text" name="comm_date" id="startDatePicker"  >
+                  <b><label for="edate">End Date</label></b>
+                  <input type="text" name="end_date" id="endDatePicker"  >
+                  <b><label for="ctime">Commencement Time</label></b>
+                  <input type="time" name="comm_time" id="ctime" step="2" >
+                  <b><label for="etime">End Time</b>
+                  <input type="time" name="end_time" id="etime" step="2" >
+                  <b><label for="slct">Event Type</b>
+                  <div class="select" style="width: 100%;">
+                    <select name="event_type_select" id="slct" onchange="showDiv('eventmsg', this)">
+                      <option selected disabled>Choose Event</option>
+                      <option value="Solo">Solo Event</option>
+                      <option value="Group">Group Event</option>
+                    </select>
+                  </div>
+                  <div id="eventmsg" style="display: none;" class="control">
+                    <b><label for="tsize">Team Size</label></b>
+                    <input type="number" name="team_size" min="1" max="4" id="tsize" placeholder="Enter team size" >
+                  </div>
+                  <b><label for="even">Event Venue</label></b>
+                  <input type="text" name="event_venue" id="even" placeholder="Enter Event Venue" >
+                  <div class="control">
+                    <b><label >Description Of Event</label></b>
+                  
+                    </div>
+                    <textarea name="event_desc" id="" cols="50" rows="10"></textarea>
+                  <div class="control">
+                      <input type="submit" class="btn" value="Send Request">
+                      </div>
+                      <div id="sendR">
+    
+                      </div>
+                  </div>
+          </form>
+           
+        </div>
+      {% endif %}
+      
+      <div class="tab-pane fade" id="pills-high" role="tabpanel" aria-labelledby="pills-high-tab" >
+        <h2>Event History</h2>
+        {% for e in eve %}
+        <div class="eventdiv"><a class="eventlink" href="{{ url_for('evedetails', eid= e.event_id  ) }}">{{ e.event_name }} </a></div>
+        {% endfor %}
+      </div>
+
+
+
+      {% if userdata.cm.flag %}
+      <div class="tab-pane fade" id="pills-team" role="tabpanel" aria-labelledby="pills-team-tab" style=" margin-left: 25%; margin-top: 100px; width: 50%; padding: 50px 60px; border-radius: 10px; box-shadow:7px 7px 60px #000;">
+        <form action="/eventreport" method="POST" enctype="multipart/form-data">
+            <h2>Event Report</h2>
+            <div class="control">
+                <b><label for="evename">Event Name</label></b>
+                <div class="select" style="width: 100%;">
+                    <select name="eventreportname" id="eventreportid" >
+                      <option selected disabled>Choose Event</option>
+                        {% for o in eve_rep %}
+                          <option value="{{ o.event_id }}">{{ o.event_name }}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                  <b><label >Winner Team</label></b>
+                  <input type="text" name='winnerid' id="p1" placeholder="Enter Team ID" >
+                  <b><label >Runner up Team</label></b>
+                  <input type="text" name='runnerupid' id="p1" placeholder="Enter Team ID" >
+                  <div class="control">
+                    <b><label >Overall Experience</label></b>
+                  
+                    </div>
+                    <textarea name="review" id="" cols="60" rows="10"></textarea>
+                    <b><label for="avatar">Upload Photos</label></b>
+                    <input type="file" id="avatar" name="imgfile[]" accept="image/png, image/jpeg" multiple>
+               <div class="control">
+                   
+                    <input type="submit" class="btn" value="Submit Report">
+                    </div>
+                    <div id="sendR">
+  
+                    </div>
+                </div>
+        </form>
+      </div>
+
+      {% endif %}
+
+    </div>
+
+
+
+  </section>
+
+
+  <!-- Footer -->
+
+  <footer id="footer">
+    <i class="social-icon fab fa-facebook-f fa-2x"></i>
+    <i class="social-icon fab fa-twitter fa-2x"></i>
+    <i class="social-icon fab fa-instagram fa-2x"></i>
+    <i class="social-icon fas fa-envelope fa-2x"></i>
+    <p style="color:#fff;">© Copyright 2021 VESIT</p>
+
+  </footer>
+
+
+</body>
+<script>
+  function myFunction() {
+    document.getElementById("ctime").step = "10";
+    document.getElementById("etime").step = "10";
+  }
+  </script>
+  <script>
+    function showDiv(divId, element)
+{
+    document.getElementById(divId).style.display = element.value == 'Group' ? 'block' : 'none';
+}
+
+
+  </script>
+  <script>
+    var myDate = new Date()
+    $("#startDatePicker").datepicker({ 
+      dateFormat: 'yy-mm-dd',
+      changeMonth: true,
+      minDate: new Date(myDate.getTime() + 10* 24 * 60 * 60 * 1000),
+      maxDate: '+2y',
+      onSelect: function(date){
+
+      var selectedDate = new Date(date);
+      var msecsInADay = 86400000;
+      var endDate = new Date(selectedDate.getTime() + msecsInADay);
+
+      $("#endDatePicker").datepicker( "option", "minDate", endDate );
+      $("#endDatePicker").datepicker( "option", "maxDate", '+2y' );
+
+          }
+      });
+
+      $("#endDatePicker").datepicker({ 
+          dateFormat: 'yy-mm-dd',
+        minDate:new Date(myDate.getTime() + 10* 24 * 60 * 60 * 1000),
+          changeMonth: true
+      });
+
+
+      $("#modchkbtn").click(function(){
+        var id = $('#eve_reg_drpdown').val()
+        alert(id)
+        
+        $.ajax({
+          type:"POST",
+          cache:false,
+          url:"{{ url_for('checkstudent') }}",
+          data:{id: id}, 
+          success: function (responsedata) {
+            $('#eve_reg_drpdown').val(responsedata);
+          }
+        });
+      });
+
+
+      $( "#eve_reg_drpdown" ).change(function() {
+        
+        var x= $(this).val()
+        var j;
+         
+        $.ajax({
+          type:"POST",
+          cache:false,
+          url:"{{ url_for('getteamsize') }}",
+          async: false,
+          data:{id: x}, 
+          success: function (responsedata) {
+            j=responsedata
+          }
+        });
+
+        j = parseInt(j)
+        
+        var container = $('<div />');
+        container.append('<input type="text" id="teamid'+'" name="teamname'+'" placeholder="Enter team Name" />');
+        for(var i = 1; i <= j; i++) {
+            container.append('<input type="text" id="id'+i+'" name="name'+i+'" placeholder="Enter Student ID" />');
+        }
+        $('#somewhere').html(container);
+
+
+      });
+      
+  </script>
+</html>
