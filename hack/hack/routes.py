@@ -19,59 +19,76 @@ def home():
 def login():
 
     if request.method == "POST":
-        #print(request.form['username'])
-        print(request.form['email'])
-        print(request.form['password'])
-        #print(request.form.get('slct'))
         
         session.pop('role',None)
         session['role'] = request.form.get('slct')
+
+        if session['role'] == None:
+            error = 'Choose the Option'
+            return render_template('login.html', error=error)
         
         if session['role'] == 'Student':
+            
             user = student.query.filter_by(email=request.form['email']).first()
-            login_user(user)
-            print(current_user)
-            print(current_user.i_id)
-            return redirect(url_for('student_page'))
+            if user and bcrypt.check_password_hash(user.password, request.form['password']):
+                
+                login_user(user)
+                return redirect(url_for('student_page'))
+
+            else:
+                error = "Invalid Credentials"
+                return render_template('login.html', error=error)
+
         
         elif session['role'] == 'Faculty':
             user = faculty.query.filter_by(email=request.form['email']).first()
 
-            login_user(user)
-          
-            return redirect(url_for('faculty_page'))
+            if user and bcrypt.check_password_hash(user.password, request.form['password']):
+                
+                login_user(user)
+                return redirect(url_for('faculty_page'))
+
+            else:
+                error = "Invalid Credentials"
+                return render_template('login.html', error=error)
         
         elif session['role'] == 'Principal':
 
             user = faculty.query.filter_by(email=request.form['email']).first()
 
-            if principal.query.filter_by(emp_id=user.emp_id).first():
-
-                login_user(user)
+            if user and bcrypt.check_password_hash(user.password, request.form['password']):
                 
+                login_user(user)
                 return redirect(url_for('principal_page'))
+
             else:
-                print('Invalid')
-                return redirect(url_for('login'))
+                error = "Invalid Credentials"
+                return render_template('login.html', error=error)
 
 
         elif session['role'] == 'Admin':
             user = admin1.query.filter_by(ad_mail=request.form['email']).first()
-            login_user(user)
+            if user and bcrypt.check_password_hash(user.password, request.form['password']):
+                
+                login_user(user)
+                return redirect(url_for('admin_page'))
 
-            return redirect(url_for('admin_page'))
+            else:
+                error = "Invalid Credentials"
+                return render_template('login.html', error=error)
             
         
         else:
             user = faculty.query.filter_by(email=request.form['email']).first()
 
-            if hod.query.filter_by(emp_id=user.emp_id).first():
+            if user and bcrypt.check_password_hash(user.password, request.form['password']):
+                
                 login_user(user)
-
                 return redirect(url_for('hod_page'))
+
             else:
-                print('Invalid')
-                return redirect(url_for('login'))
+                error = "Invalid Credentials"
+                return render_template('login.html', error=error)
     
     return render_template('login.html')
 
@@ -319,8 +336,27 @@ def faculty_page():
 
     eve = events.query.all()
 
+    getlevel = committees.query.filter_by(comit_id = cm.comit_id).first()
 
-    return render_template('faculty.html', userdata=userdata, eve=eve )
+    lvl = getlevel.level
+
+    print(lvl)
+    stubod_eve=[]
+    if lvl == 3:
+        comitobj = committees.query.filter_by(level=3).all()
+        print(comitobj)
+        stuevents = []
+        for i in comitobj:
+            if events.query.filter_by(approval_status='Pending', comit_id = i.comit_id).all():
+                stuevents.append(events.query.filter_by(approval_status='Pending', comit_id = i.comit_id).all())
+        print(stuevents)
+
+        stubod_eve = []
+        for i in stuevents:
+            for j in i:
+                stubod_eve.append(j)
+
+    return render_template('faculty.html', userdata=userdata, eve=eve , lvl=lvl, stu_bod = stubod_eve)
 
 
 
@@ -418,14 +454,24 @@ def evedetails(eid):
         for i in evem:
             evemedia.append(i)
             print(i.photos)
+    
+    if not eve.is_student :
+        faccomobj = fac_comm_members.query.filter_by(member_id = eve.organizer_id).first()
+        org_obj = faculty.query.filter_by(emp_id = faccomobj.emp_id).first()
+        org_name = org_obj.emp_name
+    else:
+        stucomobj = stu_comm_members.query.filter_by(member_id = eve.organizer_id).first()
+        org_obj = student.query.filter_by(i_id = stucomobj.i_id).first()
+        org_name = org_obj.stu_name
 
-    return render_template('details.html', eve=eve, everes= everes, evemedia = evemedia)
+    return render_template('details.html', eve=eve, everes= everes, evemedia = evemedia, org_name = org_name)
 
 
 
 @app.route('/student', methods=['GET'])
 @login_required
 def student_page():
+
 
     cm = stu_comm_members.query.filter_by(i_id=current_user.i_id).first()
     
@@ -668,7 +714,11 @@ def appdisappevent(level,eid):
             eve.completion_status = "Cancelled"
             db.session.commit()
 
-        return redirect(url_for('hod_page'))
+        return redirect(url_for('faculty_page'))
+
+
+
+
 
 
 

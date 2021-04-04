@@ -27,18 +27,20 @@
         <form action="{{ url_for('login') }}" method="POST">
             <div class="control">
             <b><label for="email">Email</label></b>
-            <input type="text" name='email' id="email" placeholder="Enter your VES ID" >
+            <input type="text" name='email' id="email" placeholder="Enter your VES ID" required>
             </div>
             <div class="control">
             <b><label for="psw">Password</label></b>
-            <input type="password" name='password' id="psw" placeholder="Enter a strong Password">
+            <input type="password" name='password' id="psw" placeholder="Enter your Password" required>
             </div>
             <div id="error_msg" style="margin-bottom: 15px; text-align: center;">
-              
+              {% if error %}
+                {{ error }}
+              {% endif %}
             </div>
             
             <div class="select">
-              <select name="slct" id="slct">
+              <select name="slct" id="slct" required>
                 <option selected disabled>Login as</option>
                 <option value="Admin">Admin</option>
                 <option value="Student">Student</option>

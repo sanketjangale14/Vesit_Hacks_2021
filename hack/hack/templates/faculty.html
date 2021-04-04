@@ -71,9 +71,15 @@
       <li class="nav-item" role="presentation" >
         <a style="font-size: large;" class="nav-link active" id="pills-rap-tab" data-toggle="pill" href="#pills-rap" role="tab" aria-controls="pills-rap" aria-selected="true">Faculty Head</a>
       </li>
+      {% if lvl!= 3 %}
       <li class="nav-item" role="presentation">
         <a style="font-size: large;" class="nav-link" id="pills-dep-tab" data-toggle="pill" href="#pills-dep" role="tab" aria-controls="pills-dep" aria-selected="false">Event Enlisting</a>
       </li>
+      {% else %}
+      <li class="nav-item" role="presentation">
+        <a style="font-size: large;" class="nav-link" id="pills-dep1-tab" data-toggle="pill" href="#pills-dep1" role="tab" aria-controls="pills-dep1" aria-selected="false">Event Approval</a>
+      </li>
+      {% endif %}
       <li class="nav-item" role="presentation">
         <a style="font-size: large;" class="nav-link" id="pills-high-tab" data-toggle="pill" href="#pills-high" role="tab" aria-controls="pills-high" aria-selected="false">Event History</a>
       </li>
@@ -148,6 +154,9 @@
       
           </div>
       </div>
+
+      {% if lvl != 3  %}
+
         <div class="tab-pane fade " id="pills-dep" role="tabpanel" aria-labelledby="pills-dep-tab" style=" margin-left: 25%; margin-top: 100px; width: 50%; padding: 50px 60px; border-radius: 10px; box-shadow:7px 7px 60px #000;">
             <h2>Create Event</h2>
             <form action="/createevent" method="POST">
@@ -191,6 +200,41 @@
             </form>
            
         </div>
+      {% else %}
+      <div class="tab-pane fade " id="pills-dep1" role="tabpanel" aria-labelledby="pills-dep1-tab" style=" margin-left: 25%; margin-top: 100px; width: 50%; padding: 50px 60px; border-radius: 10px; box-shadow:7px 7px 60px #000;">
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Event Details</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                      <th>Event Name</th>
+                      <th>Approve</th>
+                      <th>Disapprove</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {% for i in stu_bod %}
+                  <tr>
+                    <form action="{{ url_for('appdisappevent', level=3, eid= i.event_id)  }}" method="POST">
+                      <td><a class="hodlink" href="{{ url_for('evedetails', eid= i.event_id)  }}">{{ i.event_name }}</a></td>
+                      <td><input value='Approve' name="action" class="btn" type="submit" style="background-color: #e27802; color: #fff;"></td>
+                      <td><input value='Disapprove' name="action" class="btn btn-danger" type="submit"></td>
+                    </form> 
+                  </tr>
+                  {% endfor %}
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
       
       
       <div class="tab-pane fade" id="pills-high" role="tabpanel" aria-labelledby="pills-high-tab" >

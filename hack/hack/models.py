@@ -11,7 +11,6 @@ from flask import session
 @login_manager.user_loader
 def load_user(id):
 
-    print("USER LOADER:", session['role'])
     if session['role'] == 'Faculty' or session['role'] == 'Principal' or session['role'] == 'HOD':
         return faculty.query.get(id)
     elif session['role'] == 'Student':
