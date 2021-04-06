@@ -11,7 +11,7 @@ app = Flask(__name__ )
 app.config['SECRET_KEY'] = 'thisisthesecretkeyforvesithacks21project'
 
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:12345@localhost/event_dashboard"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:abc456@localhost/event_dashboard"
 
 UPLOADS_PATH = join(dirname(realpath(__file__)), 'static/uploads')
 UPLOAD_FOLDER = 'static/uploads'
