@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>VESIT</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Ubuntu&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+ 
+
+  
+     <!-- Nav Bar -->
+  <div style="width: 100%;">
+  <nav class="navbar  navbar-expand-lg navbar-dark tinav " style="background-color: black; opacity: 0.8;">
+    <a class="navbar-brand" href="" style="width: 15%;"><img src="images/v5.png" alt="" style="width: 15%; margin-right: 10px; margin-left: 10px;">VESIT Dashboard</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#footer">Contact us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  </div>
+
+
+
+  <section id="about">
+    <hr>
+    <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist" >
+      <li class="nav-item" role="presentation" >
+        <a style="font-size: medium;" class="nav-link active" id="pills-rap-tab" data-toggle="pill" href="#pills-rap" role="tab" aria-controls="pills-rap" aria-selected="true">Department/Faculty</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a style="font-size: medium;" class="nav-link" id="pills-dep-tab" data-toggle="pill" href="#pills-dep" role="tab" aria-controls="pills-dep" aria-selected="false">Institute Level Committee</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a style="font-size: medium;" class="nav-link" id="pills-high-tab" data-toggle="pill" href="#pills-high" role="tab" aria-controls="pills-high" aria-selected="false">Department Level Committee</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a style="font-size: medium;" class="nav-link" id="pills-team-tab" data-toggle="pill" href="#pills-team" role="tab" aria-controls="pills-team" aria-selected="false">Student Bodies</a>
+      </li>
+    </ul>
+    <hr>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-rap" role="tabpanel" aria-labelledby="pills-rap-tab">
+        <div class="row">
+          <div class="about-column col-lg-6 col-md-6 " style="border-right: 3px solid black;" >
+            <h2>Add Faculty</h2> 
+            <form action="">
+                <div class="select">
+                  <select name="slct" id="slct">
+                    <option selected disabled>Choose Department</option>
+                    <option value="1">Computer Engineering</option>
+                    <option value="2">Information Technology Engineering</option>
+                    <option value="3">Electronics Engeering</option>
+                    <option value="4">Electronics and Telecommunication Engineering</option>
+                    <option value="5">Instrumentation Engineering</option>
+                  </select>
+                </div>
+                <div class="control">
+                  <b><label for="name">Name</label></b>
+                  <input type="text" id="name" placeholder="Enter your Full Name" >
+                  </div>
+                  <div class="control">
+                    <b><label for="email">Email</label></b>
+                    <input type="text" id="email" placeholder="Enter your VES ID" >
+                    </div>
+                    <div class="control">
+                      <b><label for="contact">Contact Number</label></b>
+                      <input type="text" id="contact" placeholder="Enter your VES ID" >
+                      </div>
+                    <div class="control">
+                      <input type="submit" class="btn" value="Done">
+                      </div>
+                    <div id="addF">
+                        
+                    </div>
+              </form>
+          </div>
+    
+          <div class="about-column col-lg-6 col-md-6 ">
+            <h2>Add Department</h2>
+            <form action="">
+              
+              <div class="control">
+                <b><label for="dname">Department Name</label></b>
+                <input type="text" id="dname" placeholder="Enter your Department Name" >
+                </div>
+                  <div class="control">
+                    <input type="submit" class="btn" value="Add">
+                    </div>
+                  <div id="addDep">
+
+                  </div>
+            </form>
+            <hr style="height: 1px; background: black;">
+            <h2>Assign HOD</h2>
+            <form action="">
+                <b><label for="hname">HOD Name</label></b>
+                <div class="input-group mb-3 " >
+                  <input style="background: #ddd;" type="text" class="form-control" placeholder="Enter HOD Name" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn " type="button" style="background-color: #e27802; color: #fff;">Check</button>
+                  </div>
+                </div>
+                <div id="checkHod">
+
+                </div>
+                <div class="control">
+                  <input type="submit" class="btn" value="Add">
+                  </div>
+                  <div id="addHod">
+
+                  </div>
+            </form>
+          </div>
+    
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-dep" role="tabpanel" aria-labelledby="pills-dep-tab">
+        <div class="row">
+          <div class="about-column col-lg-6 col-md-6 " style="border-right: 3px solid black;" >
+            <h2>Add Faculty Member</h2> 
+            <form action="">
+                <div class="select">
+                  <select name="slct" id="slct">
+                    <option selected disabled>Choose Committee</option>
+                    <option value="1">VRC</option>
+                    <option value="2">Veslit</option>
+                    <option value="3">VESIT Swayam</option>
+                    <option value="4">Electronics and Telecommunication Engineering</option>
+                    <option value="5">Instrumentation Engineering</option>
+                  </select>
+                </div>
+                <div class="input-group mb-3 " >
+                  <input style="background: #ddd;" type="text" class="form-control" placeholder="Enter Faculty ID" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn " type="button" style="background-color: #e27802; color: #fff;">Check</button>
+                  </div>
+                </div>
+                <div id="checkfacInst">
+
+                </div>
+                <div class="control">
+                  <b><label for="role">Role</label></b>
+                  <input type="text" id="role" placeholder="Enter your role" >
+                  </div>
+                <div class="control">
+                  <input type="submit" class="btn" value="Add">
+                  </div>
+                  <div id="addRol">
+
+                  </div>
+                    <div id="addF">
+                        
+                    </div>
+              </form>
+          </div>
+    
+          <div class="about-column col-lg-6 col-md-6 ">
+            <h2>Add Committee</h2>
+            <form action="">
+              
+              <div class="control">
+                <b><label for="ciname">Committee Name</label></b>
+                <input type="text" id="ciname" placeholder="Enter your Committee Name" >
+                </div>
+                  <div class="control">
+                    <input type="submit" class="btn" value="Add">
+                    </div>
+                  <div id="addIcom">
+
+                  </div>
+            </form>
+            <hr style="height: 1px; background: black;">
+            <h2>Modify Role</h2>
+            <form action="">
+              <div class="select">
+                <select name="slct" id="slct">
+                  <option selected disabled>Choose Faculty</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+              <div class="control">
+                <b><label for="role1">Role</label></b>
+                <input type="text" id="role1" placeholder="Enter your role" >
+                </div>
+
+                <div class="control">
+                  <input type="submit" class="btn" value="Modify">
+                  </div>
+                  <div id="modRole">
+
+                  </div>
+            </form>
+          </div>
+    
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-high" role="tabpanel" aria-labelledby="pills-high-tab">
+        <div class="row">
+          <div class="about-column col-lg-6 col-md-6 " style="border-right: 3px solid black;" >
+            <h2>Add Faculty Member</h2> 
+            <form action="">
+                <div class="select">
+                  <select name="slct" id="slct">
+                    <option selected disabled>Choose Committee</option>
+                    <option value="1">VRC</option>
+                    <option value="2">Veslit</option>
+                    <option value="3">VESIT Swayam</option>
+                    <option value="4">Electronics and Telecommunication Engineering</option>
+                    <option value="5">Instrumentation Engineering</option>
+                  </select>
+                </div>
+                <div class="input-group mb-3 " >
+                  <input style="background: #ddd;" type="text" class="form-control" placeholder="Enter Faculty ID" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn " type="button" style="background-color: #e27802; color: #fff;">Check</button>
+                  </div>
+                </div>
+                <div id="checkfacDep">
+
+                </div>
+                <div class="control">
+                  <b><label for="role2">Role</label></b>
+                  <input type="text" id="role2" placeholder="Enter your role" >
+                  </div>
+                <div class="control">
+                  <input type="submit" class="btn" value="Add">
+                  </div>
+                  <div id="addRol2">
+
+                  </div>
+                    <div id="addF2">
+                        
+                    </div>
+              </form>
+          </div>
+    
+          <div class="about-column col-lg-6 col-md-6 ">
+            <h2>Add Committee</h2>
+            <form action="">
+              
+              <div class="control">
+                <b><label for="cdname">Committee Name</label></b>
+                <input type="text" id="cdname" placeholder="Enter your Committee Name" >
+                </div>
+                  <div class="control">
+                    <input type="submit" class="btn" value="Add">
+                    </div>
+                  <div id="addDcom">
+
+                  </div>
+            </form>
+            <hr style="height: 1px; background: black;">
+            <h2>Modify Role</h2>
+            <form action="">
+              <div class="select">
+                <select name="slct" id="slct">
+                  <option selected disabled>Choose Faculty</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+              <div class="control">
+                <b><label for="role3">Role</label></b>
+                <input type="text" id="role3" placeholder="Enter your role" >
+                </div>
+
+                <div class="control">
+                  <input type="submit" class="btn" value="Modify">
+                  </div>
+                  <div id="modRole3">
+
+                  </div>
+            </form>
+          </div>
+    
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-team" role="tabpanel" aria-labelledby="pills-team-tab">
+        <div class="row">
+          <div class="about-column col-lg-6 col-md-6 " style="border-right: 3px solid black;" >
+            <h2>Add Faculty Member</h2> 
+            <form action="">
+                <div class="select">
+                  <select name="slct" id="slct">
+                    <option selected disabled>Choose Committee</option>
+                    <option value="1">VRC</option>
+                    <option value="2">Veslit</option>
+                    <option value="3">VESIT Swayam</option>
+                    <option value="4">Electronics and Telecommunication Engineering</option>
+                    <option value="5">Instrumentation Engineering</option>
+                  </select>
+                </div>
+                <div class="input-group mb-3 " >
+                  <input style="background: #ddd;" type="text" class="form-control" placeholder="Enter Faculty ID" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn " type="button" style="background-color: #e27802; color: #fff;">Check</button>
+                  </div>
+                </div>
+                <div id="checkFacStuB">
+
+                </div>
+                <div class="control">
+                  <b><label for="role4">Role</label></b>
+                  <input type="text" id="role4" placeholder="Enter your role" >
+                  </div>
+                <div class="control">
+                  <input type="submit" class="btn" value="Add">
+                  </div>
+                  <div id="addRol4">
+
+                  </div>
+                    <div id="addF4">
+                        
+                    </div>
+              </form>
+          </div>
+    
+          <div class="about-column col-lg-6 col-md-6 ">
+            <h2>Add Committee</h2>
+            <form action="">
+              
+              <div class="control">
+                <b><label for="cStuBname">Committee Name</label></b>
+                <input type="text" id="cStuBname" placeholder="Enter your Committee Name" >
+                </div>
+                  <div class="control">
+                    <input type="submit" class="btn" value="Add">
+                    </div>
+                  <div id="addStuBcom">
+
+                  </div>
+            </form>
+            <hr style="height: 1px; background: black;">
+            <h2>Modify Role</h2>
+            <form action="">
+              <div class="select">
+                <select name="slct" id="slct">
+                  <option selected disabled>Choose Faculty</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+              <div class="control">
+                <b><label for="role5">Role</label></b>
+                <input type="text" id="role5" placeholder="Enter your role" >
+                </div>
+
+                <div class="control">
+                  <input type="submit" class="btn" value="Modify">
+                  </div>
+                  <div id="modRole5">
+
+                  </div>
+            </form>
+          </div>
+    
+        </div>
+    </div>
+
+
+
+  </section>
+
+
+  <!-- Footer -->
+
+  <footer id="footer">
+    <i class="social-icon fab fa-facebook-f fa-2x"></i>
+    <i class="social-icon fab fa-twitter fa-2x"></i>
+    <i class="social-icon fab fa-instagram fa-2x"></i>
+    <i class="social-icon fas fa-envelope fa-2x"></i>
+    <p style="color:#fff;">© Copyright 2021 VESIT</p>
+
+  </footer>
+
+
+</body>
+
+</html>
